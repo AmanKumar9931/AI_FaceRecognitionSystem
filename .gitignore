@@ -1,0 +1,17 @@
+# Python cache
+__pycache__/
+*.pyc
+
+# Virtual environment
+venv/
+.env/
+
+# Dataset (VERY IMPORTANT)
+dataset/
+
+# Attendance file
+attendance.csv
+
+# OS junk
+.DS_Store
+Thumbs.db
