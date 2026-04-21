@@ -223,6 +223,8 @@ def mark_attendance_csv(name, reg_no):
         df = pd.concat([df, new_row], ignore_index=True)
         df.to_csv(CSV_FILE, index=False)
 
+load_known_faces()
+
 if __name__ == "__main__":
-    load_known_faces()
-    app.run(host="0.0.0.0", port=5000)
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host="0.0.0.0", port=port)
