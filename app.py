@@ -189,6 +189,23 @@ def api_mark_attendance():
         print(f"Attendance Error: {e}")
         return jsonify({"status": "error"}), 500
 
+@app.route('/view_attendance')
+def view_attendance():
+    """Route to view attendance data on the web"""
+    if not os.path.exists(CSV_FILE):
+        return render_template('attendance.html', records=[])
+    df = pd.read_csv(CSV_FILE)
+    records = df.to_dict('records')
+    return render_template('attendance.html', records=records)
+
+@app.route('/download_attendance')
+def download_attendance():
+    """Route to download the attendance CSV"""
+    from flask import send_file
+    if not os.path.exists(CSV_FILE):
+        return "No attendance marked yet."
+    return send_file(CSV_FILE, as_attachment=True)
+
 # --- DATA MANAGEMENT ---
 def load_known_faces():
     global known_embeddings, known_reg_nos, known_names
